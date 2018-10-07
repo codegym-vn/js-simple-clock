@@ -12,14 +12,14 @@
         const SIZE = 400;
 
         function Clock(second, minute, hour, canvas) {
-            this.second = second;
-            this.minute = minute;
-            this.hour = hour;
-            this.canvas = canvas;
-            this.tickInterval = -1;
             var self = this;
-            
-            this.render = function () {
+            self.second = second;
+            self.minute = minute;
+            self.hour = hour;
+            self.canvas = canvas;
+            self.tickInterval = -1;
+
+            self.render = function () {
                 var context = self.canvas.getContext('2d');
                 context.clearRect(0, 0, SIZE, SIZE);
                 var center = SIZE / 2;
@@ -59,7 +59,7 @@
 
             };
 
-            this.drawLine = function (length, angle, context, lineWidth) {
+            self.drawLine = function (length, angle, context, lineWidth) {
                 var center = SIZE / 2;
                 var x = length * Math.sin(-angle) + SIZE / 2;
                 var y = length * Math.cos(-angle) + SIZE / 2;
@@ -71,7 +71,7 @@
                 context.closePath();
             };
 
-            this.drawNumbers = function () {
+            self.drawNumbers = function () {
                 var context = self.canvas.getContext('2d');
                 context.lineWidth = 1;
                 var numberPadding = SIZE / 2 - 20;
@@ -83,7 +83,7 @@
                 }
             };
 
-            this.tick = function () {
+            self.tick = function () {
                 self.second++;
                 if(self.second === 60){
                     self.second = 0;
@@ -99,11 +99,11 @@
                 self.render();
             };
 
-            this.start = function () {
+            self.start = function () {
                 self.tickInterval = setInterval(self.tick, 1000);
             };
 
-            this.stop = function () {
+            self.stop = function () {
                 if(self.tickInterval !== -1){
                     clearInterval(tickInterval);
                     self.tickInterval = -1;
